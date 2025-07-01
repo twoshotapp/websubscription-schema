@@ -28,7 +28,7 @@ export interface UnsubscribeMessage extends WebSocketMessage {
 // Server to Client Messages
 export interface AuthSuccessResponse extends ServerResponse {
   action: 'auth_success';
-  userId: string;
+  userId: number;
 }
 
 export interface SubscribeResultResponse extends ServerResponse {
@@ -154,30 +154,31 @@ export interface GenerationAudioOutputRedisMessage extends RedisEventMessage {
   generationId: string;
   audioId: string;
   outputName: string;
-  userId?: string;
+  userId?: number;
   timestamp: string;
 }
 
 export interface GenerationCompleteRedisMessage extends RedisEventMessage {
   eventType: 'generation_complete';
   generationId: string;
-  userId?: string;
+  userId?: number;
   status: 'success' | 'failed';
   errorMessage?: string;
   timestamp: string;
+  completedAt?: string;
 }
 
 export interface ProjectUpdateRedisMessage extends RedisEventMessage {
   eventType: 'project_update';
   projectId: string;
-  userId: string;
+  userId: number;
   timestamp: string;
 }
 
 export interface ProjectDeleteRedisMessage extends RedisEventMessage {
   eventType: 'project_delete';
   projectId: string;
-  userId: string;
+  userId: number;
   timestamp: string;
 }
 
