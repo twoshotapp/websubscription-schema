@@ -60,22 +60,25 @@ export interface GenerationAudioOutputEvent extends NotificationResponse {
   generationId: string;
   audioId: string;
   outputName: string;
+  userId?: number;
   timestamp: string;
 }
 
 export interface GenerationCompleteEvent extends NotificationResponse {
   type: 'generation_complete';
   generationId: string;
+  userId?: number;
   status: 'success' | 'failed';
   errorMessage?: string;
   timestamp: string;
+  completedAt: string;
 }
 
 // Project Events
 export interface ProjectUpdateEvent extends NotificationResponse {
   type: 'project_update';
   projectId: string;
-  userId: string;
+  userId: number;
   timestamp: string;
   message: string;
 }
@@ -83,7 +86,7 @@ export interface ProjectUpdateEvent extends NotificationResponse {
 export interface ProjectDeleteEvent extends NotificationResponse {
   type: 'project_delete';
   projectId: string;
-  userId: string;
+  userId: number;
   timestamp: string;
   message: string;
 }
