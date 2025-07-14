@@ -18,6 +18,7 @@ export interface AuthMessage extends WebSocketMessage {
 export interface SubscribeMessage extends WebSocketMessage {
   type: 'subscribe';
   topics: string[];
+  sessionId?: string; // Optional sessionId for studio project subscriptions
 }
 
 export interface UnsubscribeMessage extends WebSocketMessage {
@@ -29,6 +30,12 @@ export interface UnsubscribeMessage extends WebSocketMessage {
 export interface AuthSuccessResponse extends ServerResponse {
   action: 'auth_success';
   userId: number;
+}
+
+export interface SessionCreatedResponse extends ServerResponse {
+  action: 'session_created';
+  sessionId: string;
+  topic: string;
 }
 
 export interface SubscribeResultResponse extends ServerResponse {
@@ -79,6 +86,7 @@ export interface ProjectUpdateEvent extends NotificationResponse {
   type: 'project_update';
   projectId: string;
   userId: number;
+  sessionId?: string; // Session that triggered the update
   timestamp: string;
   message: string;
 }
@@ -87,6 +95,7 @@ export interface ProjectDeleteEvent extends NotificationResponse {
   type: 'project_delete';
   projectId: string;
   userId: number;
+  sessionId?: string; // Session that triggered the delete
   timestamp: string;
   message: string;
 }
@@ -172,6 +181,7 @@ export interface ProjectUpdateRedisMessage extends RedisEventMessage {
   eventType: 'project_update';
   projectId: string;
   userId: number;
+  sessionId?: string; // Session that triggered the update
   timestamp: string;
 }
 
@@ -179,6 +189,7 @@ export interface ProjectDeleteRedisMessage extends RedisEventMessage {
   eventType: 'project_delete';
   projectId: string;
   userId: number;
+  sessionId?: string; // Session that triggered the delete
   timestamp: string;
 }
 
